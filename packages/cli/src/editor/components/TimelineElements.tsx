@@ -59,14 +59,16 @@ export const TimelineElements: React.FC = () => {
 												height: 80,
 												marginTop: 1,
 												marginLeft: `calc(${
-													(s.sequence.from / videoConfig.durationInFrames) * 100
+													(s.sequence.from /
+														(videoConfig.durationInFrames - 1)) *
+													100
 												}%)`,
 												width:
 													s.sequence.duration === Infinity
 														? width
 														: `calc(${
-																(s.sequence.duration /
-																	videoConfig.durationInFrames) *
+																((s.sequence.duration - 1) /
+																	(videoConfig.durationInFrames - 1)) *
 																100
 														  }%)`,
 												color: 'white',

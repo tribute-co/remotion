@@ -146,6 +146,14 @@ export const Index: React.FC = () => {
 				fps={30}
 				durationInFrames={10}
 			/>
+			<Composition
+				id="video-test"
+				lazyComponent={() => import('./VideoTest')}
+				width={1920}
+				height={1080}
+				fps={30}
+				durationInFrames={100}
+			/>
 		</>
 	);
 };

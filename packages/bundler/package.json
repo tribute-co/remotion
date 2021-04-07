@@ -20,6 +20,7 @@
 	"license": "SEE LICENSE IN LICENSE.md",
 	"dependencies": {
 		"@webhotelier/webpack-fast-refresh": "5.0.1",
+		"@remotion/fast-refresh": "^1.4.0",
 		"css-loader": "^5.0.1",
 		"esbuild-loader": "^2.10.0",
 		"execa": "^4.0.3",

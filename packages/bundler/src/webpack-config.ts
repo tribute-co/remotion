@@ -4,7 +4,7 @@ import webpack, {ProgressPlugin} from 'webpack';
 import {getWebpackCacheName} from './webpack-cache';
 
 const ErrorOverlayPlugin = require('@webhotelier/webpack-fast-refresh/error-overlay');
-const ReactRefreshPlugin = require('@webhotelier/webpack-fast-refresh');
+const ReactRefreshPlugin = require('@remotion/fast-refresh');
 
 type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T;
 function truthy<T>(value: T): value is Truthy<T> {
@@ -54,7 +54,7 @@ export const webpackConfig = ({
 				? require.resolve('webpack-hot-middleware/client') + '?overlay=true'
 				: null,
 			environment === 'development'
-				? require.resolve('@webhotelier/webpack-fast-refresh/runtime.js')
+				? require.resolve('@remotion/fast-refresh/dist/runtime')
 				: null,
 			userDefinedComponent,
 			require.resolve('../react-shim.js'),
@@ -127,6 +127,7 @@ export const webpackConfig = ({
 				{
 					test: /\.tsx?$/,
 					use: [
+						require.resolve('@remotion/fast-refresh/dist/loader'),
 						{
 							loader: require.resolve('esbuild-loader'),
 							options: {
@@ -134,13 +135,6 @@ export const webpackConfig = ({
 								target: 'chrome85',
 							},
 						},
-						environment === 'development'
-							? {
-									loader: require.resolve(
-										'@webhotelier/webpack-fast-refresh/loader.js'
-									),
-							  }
-							: null,
 					].filter(truthy),
 				},
 				{

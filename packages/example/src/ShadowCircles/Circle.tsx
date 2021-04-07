@@ -40,7 +40,7 @@ export const Circle: React.FC<{
 	const y = -radius * Math.sin(angle) + radius;
 	const amountToMove = (videoConfig.width - size) * (1 - progress);
 	const shade = 1 - Math.min(1, size / videoConfig.width);
-	const color = mix(shade * 0.1, '#000', '#fff');
+	const color = mix(shade * 8, '#000', '#fff');
 
 	return (
 		<svg

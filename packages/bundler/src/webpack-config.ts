@@ -11,6 +11,10 @@ function truthy<T>(value: T): value is Truthy<T> {
 	return Boolean(value);
 }
 
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+
+const smp = new SpeedMeasurePlugin();
+
 export const webpackConfig = ({
 	entry,
 	userDefinedComponent,
@@ -33,6 +37,7 @@ export const webpackConfig = ({
 	return webpackOverride({
 		optimization: {
 			minimize: false,
+			splitChunks: false,
 		},
 		experiments: {
 			lazyCompilation:
@@ -49,9 +54,11 @@ export const webpackConfig = ({
 			  }
 			: false,
 		devtool: 'cheap-module-source-map',
+		stats: 'verbose',
+
 		entry: [
 			environment === 'development'
-				? require.resolve('webpack-hot-middleware/client') + '?overlay=true'
+				? require.resolve('webpack-hot-middleware/client')
 				: null,
 			environment === 'development'
 				? require.resolve('@remotion/fast-refresh/dist/runtime')

@@ -143,7 +143,7 @@ const BetaText: React.FC<{
 										? word1 ?? 'TOMORROW'
 										: key === 1
 										? 'ANYSTICKER'
-										: 'BETA'
+										: 'ANYSIT'
 								}
 								i={key}
 								videoWidth={videoConfig.width}

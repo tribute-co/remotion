@@ -38,6 +38,7 @@
 		"react-native": "0.63.4",
 		"react-native-web": "0.14.13",
 		"remotion": "1.5.4",
+		"speed-measure-webpack-plugin": "^1.5.0",
 		"styled-components": "^5.1.1",
 		"svg-path-properties": "^1.0.4",
 		"three": "^0.125.0",

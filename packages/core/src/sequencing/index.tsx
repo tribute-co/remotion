@@ -29,6 +29,7 @@ export const Sequence: React.FC<{
 	name?: string;
 	layout?: 'absolute-fill' | 'none';
 	showInTimeline?: boolean;
+	still?: boolean;
 }> = ({
 	from,
 	durationInFrames,
@@ -36,6 +37,7 @@ export const Sequence: React.FC<{
 	name,
 	layout = 'absolute-fill',
 	showInTimeline = true,
+	still = false
 }) => {
 	const [id] = useState(() => String(Math.random()));
 	const parentSequence = useContext(SequenceContext);
@@ -102,7 +104,7 @@ export const Sequence: React.FC<{
 	const {registerSequence, unregisterSequence} = useContext(CompositionManager);
 
 	const contextValue = useMemo((): SequenceContextType => {
-		return {
+		return still ? null : {
 			cumulatedFrom,
 			relativeFrom: from,
 			durationInFrames: actualDurationInFrames,

@@ -1,176 +1,90 @@
-import React from 'react';
-import {
-	Audio,
-	Composition,
-	Sequence,
-	Video,
-	spring,
-	useCurrentFrame,
-	useVideoConfig,
-} from "remotion";
-
-import tribute_data from './tribute.json';
-// import tribute_data from './long_tribute.json';
+import PropTypes from "prop-types";
 
 export let totalFrames = 1300;  // total number of frames
 
 
-const springTransformAnim = () => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
-
-  const scale = spring({
-    fps,
-    from: 0,
-    to: 1,
-    frame
-  });
-
-  return `scale(${scale})`
+type TributeTextField = {
+	x: number,
+	y: number,
+	text: string,
+	width: number,
+	height: number,
+	fontSize: number,
+	fontColor: string,
+	fontFamily: string,  // choices
+	fontWeight: number
 }
 
 
-export const TributeVideo: React.FC = () => {
-	const {
-		width,
-		height,
-		fps,
-		durationInFrames,
-  } = useVideoConfig();
+type TributeMediaItem = {
+	duration: number,
+	from: number,
+	end: number,
+	trim: Array<number>,
+	type: string,
+	video: string, // url
+	filter: string, // choices from some list maybe?
+	volume: number,
+	uploader: string, // ?
+	video_hq: string, // url
+	textFields: Array<TributeTextField>,  // complete with this type
+	transition: string,  // choices
+	rotationIndex: number,
+	muteBackgroundMusic: boolean,
+	img: string,  // url
+	background: string,  // hexa color
+}
 
-	const { media, playlist, tracks } = tribute_data;
 
-	let ordered_playlist = [];  // elements sequence
-	let audio_tracks = [];      // audio tracks
-	let current_frame = 0;      // frame to cut each divider
-	let duration:number = 0;    // duration (in frames) for each piece
-	let contentDuration:number = 0;  // duration (in frames) for media content (no audio tracks)
+type TributeAudioTrack = {
+	id: string,
+	end: number,
+	src: string,  // url
+	blob: string,  // blob url
+	start: number,
+	title: string,
+	volume: number,
+	trackId?: string,
+	audioTag?: string,
+	duration: number,
+	progress: number,
+	widthUnits: Array<number>,
+	startOffset: number,
+	waveformUrl?: string,
+	originalDuration: number
+}
 
-	// get tracks
-	for (let idx=0; idx < tracks.length; idx++) {
-		debugger;
-		const {
-			// start,  // always 0, not used
-			// startOffset,
-			// volume,
-			duration,
-			originalDuration,
-			// end,    // always 0, not used
-			src,
-		} = tracks[idx];
-		audio_tracks.push(
-			<Audio
-				key={`audio#${idx}`}
-				src={src}
-				startFrom={0}
-				// startFrom={start * fps}
-				endAt={parseInt(duration * fps)}
-				// endAt={end * fps}
-			/>
-		);
-	}
 
-	// get media sequences
-	for (let idx=0; idx < playlist.length; idx++) {
-		// console.log("Frame: ", current_frame);
-		const sequence_data = media[playlist[idx]];
-		const elemDuration = parseInt(sequence_data.duration * fps);
-		totalFrames = totalFrames + elemDuration;
+type TributeConfig = {
+	applyKenburns: boolean,
+	pauseMusicOnVideo: boolean,
+	viginetteByDefault: boolean,
+	backgroundMusicVolume: number,
+	staticBackgroundMusicVolume: number
+}
 
-		switch (sequence_data.type) {
-			case 'title':
-				const { background, textFields} = sequence_data;
-				ordered_playlist.push(
-					<Sequence
-						from={current_frame}
-						key={`seq#${idx}`}
-						durationInFrames={elemDuration}
-					>
-						{textFields.map((data:object, idx:number) => {
-							debugger;
-							const padding = parseInt(data.fontSize);
-							const boxPadding = `${padding}px`;
-							const boxWidth = (data.width * width) - (padding * 2);
-							const boxHeight = (data.height * height) - (padding * 2);
-							const elemRotation = data.rotationIndex ? `rotate(${data.rotationIndex}deg)` : '';
-							return (
-								<span
-									key={`title#${idx}`}
-									style={{
-										fontSize: data.fontSize + "px",
-										backgroundColor: background,
-										boxSizing: 'content-box',
-										borderRadius: ".2em",
-										color: data.fontColor,
-										fontFamily: data.fontFamily,
-										fontWeight: data.fontWeight,
-										display: 'block',
-										padding: boxPadding,
-										position: 'absolute',
-										textAlign: 'center',
-										width: boxWidth,
-										height: boxHeight,
-										top: data.y * width,
-										left: data.x * height,
-										transform: elemRotation + " " + springTransformAnim(),
-									}}
-								>
-									{data.text}
-								</span>
-							);
-						})}
-					</Sequence>
-				);
-				break;
 
-			case 'video':
-				const [videoStart, videoEnd] = sequence_data.trim;
-				ordered_playlist.push(
-					<Sequence
-						key={`seq#${idx}`}
-						from={current_frame}
-						durationInFrames={elemDuration}
-					>
-						<Video
-							src={sequence_data.video}
-							startFrom={videoStart * fps}
-							endAt={videoEnd * fps}
-							style={{
-								height: height,
-								width: width
-							}}
-						/>
-					</Sequence>
-				);
-				break;
+type Tribute = {
+	id: string,
+	media: {},
+	config: TributeConfig,
+	tracks: Array<TributeAudioTrack>,
+	pending: Array<any>,
+  restore: Array<any>,
+  version: number,
+  playlist: Array<string>
+}
 
-			case 'img':
-				ordered_playlist.push(
-					<Sequence
-						key={`seq#${idx}`}
-						from={current_frame}
-						durationInFrames={elemDuration}
-					>
-						<img
-							src={sequence_data.img}
-							style={{ textAlign: 'center' }} />
-					</Sequence>
-				);
-				break;
 
-			default:
-				console.error("Unknown type to render!")
-		}
-		// update the current frame for next sequence elem
-		current_frame = current_frame + elemDuration;
-	};
+type TributeVideoProps = {
+  tributeData: PropTypes.object,
+}
 
-	console.log(`Total # frames: ${totalFrames}`);
 
-  return (
-		<div style={{flex:1, backgroundColor: 'black'}}>
-			{audio_tracks}
-			{ordered_playlist}
+export const TributeVideo:React.FC = ({mediaAssets}) => {
+	return (
+		<div style={{flex:1, backgroundColor: '#3b3b3b'}}>
+			{mediaAssets}
 		</div>
-  );
+	);
 }

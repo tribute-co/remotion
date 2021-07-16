@@ -6,6 +6,9 @@ FROM node:alpine
 # Installs latest Chromium (85) package.
 RUN apk add --no-cache \
   chromium \
+  python2 \
+  make \
+  g++ \
   nss \
   freetype \
   freetype-dev \
@@ -32,7 +35,7 @@ RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
   && chown -R pptruser:pptruser /home/pptruser \
   && chown -R pptruser:pptruser /app
 # Run everything after as non-privileged user.
-USER pptruser
+USER root
 
 EXPOSE 8000
 

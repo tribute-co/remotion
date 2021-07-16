@@ -1,4 +1,4 @@
-import {useCurrentFrame, interpolate, Img} from 'remotion';
+import {useCurrentFrame, interpolate, Img, Video} from 'remotion';
 import { crossZoom, fadeIn } from './tributeTransitions';
 
 import '../styles/main.scss';
@@ -42,6 +42,7 @@ export const TributeAssetTitle: React.FC<{data: any; background: string; transit
 export const TributeAssetImg: React.FC<{src: string; transition: string; rotation:number}> = ({src, transition, rotation}) => {
 
   const frame = useCurrentFrame();
+  // TODO: map whichever comes in transition param
   const styleTransition = fadeIn;
 
   return (
@@ -50,6 +51,30 @@ export const TributeAssetImg: React.FC<{src: string; transition: string; rotatio
       src={src}
       className='TributeAssetImg'
       style={{
+        transform: `rotate(${rotation}deg)`,
+        ...styleTransition(frame),
+      }} />
+  )
+}
+
+
+export const TributeAssetVideo: React.FC<{src: string; volume: number; transition: string; startFrom: number; endAt: number; rotation: number}> = ({src, volume, transition, startFrom, endAt, rotation}) => {
+
+  const frame = useCurrentFrame();
+  // TODO: map whichever comes in transition param
+  const styleTransition = fadeIn;
+
+  return (
+    <Video
+      key={`title#bla`}
+      src={src}
+      volume={volume}
+      className='TributeAssetVideo'
+      startFrom={startFrom}
+      endAt={endAt}
+      style={{
+        height: "100%",
+        width: "100%",
         transform: `rotate(${rotation}deg)`,
         ...styleTransition(frame),
       }} />

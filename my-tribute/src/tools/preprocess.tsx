@@ -15,6 +15,7 @@ import {
 import {
   TributeAssetTitle,
   TributeAssetImg,
+  TributeAssetVideo,
 } from "./tributeAssets";
 
 import '../styles/fonts.css';
@@ -188,13 +189,15 @@ export const preprocess = (
             frame,
             [currentFrame, currentFrame + transitionDurationInFrames],
             [0, 1],
-            {extrapolateRight: 'clamp'}
+            {
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp',
+            }
           )
         }
       )
     }
 
-    // if (currentElem.muteBackgroundMusic || currentElem.type === 'video') {
     if (currentElem.muteBackgroundMusic) {
       // add video frames range to silence tracks
       addRangeToDimVolumeList(currentFrame, currentFrame + elemDurationInFrames);
@@ -208,8 +211,17 @@ export const preprocess = (
 
 		switch (currentElem.type) {
       case 'video':
+        // const {
+        //   filter,
+        //   duration,
+        //   uploader,
+        //   video_hq,
+        //   muteBackgroundMusic,
+        // } = currentElem;
         const [videoStart, videoEnd] = currentElem.trim;
+
         elemDurationInFrames = Math.round((parseInt(videoEnd) - parseInt(videoStart)) * fps);
+
         mediaAssets.push(
           <Sequence
             name={`Seq elem #${idx} - Video`}
@@ -217,29 +229,18 @@ export const preprocess = (
             from={currentFrame}
             durationInFrames={elemDurationInFrames}
           >
-            <Video
+            <TributeAssetVideo
+              key={`title#${idx}`}
               src={currentElem.video}
+              transition={currentElem.transition}
+              rotation={currentElem.rotationIndex}
               volume={currentElem.volume}
-              // startFrom={Math.round(videoStart)}
-              // endAt={Math.round(videoEnd)}
-              style={{
-                height: "100%",
-                width: "100%",
-                ...elemTransition(frame),
-              }}
             />
           </Sequence>
         );
         break;
 
       case 'title':
-        const {
-          background,
-          rotationIndex,
-          textFields,
-          transition
-        } = currentElem;
-
         mediaAssets.push(
           <Sequence
             name={`Seq elem #${idx} - Title`}
@@ -247,13 +248,13 @@ export const preprocess = (
             key={`seq#${idx}`}
             durationInFrames={elemDurationInFrames}
           >
-            {textFields.map((data:any, idx:number) => (
+            {currentElem.textFields.map((data:any, idx:number) => (
               <TributeAssetTitle
                 key={`title#${idx}`}
                 data={data}
-                background={background}
-                transition={transition}
-                rotation={rotationIndex}
+                background={currentElem.background}
+                transition={currentElem.transition}
+                rotation={currentElem.rotationIndex}
               />
             ))}
           </Sequence>
@@ -307,15 +308,11 @@ export const preprocess = (
         from={currentFrame}
         durationInFrames={outroDurationInFrames}
       >
-        <Video
+        <TributeAssetVideo
           src="https://tribute-video-assets.s3.amazonaws.com/tribute_intro_jingle_video_7s.mp4"
           volume={outroVolume}
           startFrom={0}
           endAt={outroDurationInFrames}
-          style={{
-            height: "100%",
-            width: "100%"
-          }}
         />
       </Sequence>
     );

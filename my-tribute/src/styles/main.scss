@@ -1,20 +1,25 @@
 // some global tribute values
-$asset-color-bg: #ccc !default;
-$asset-color-text: #333 !default;
-$border-radius-small: ".2em";
+// $asset-color-bg: #ccc !default;
+// $asset-color-text: #333 !default;
+// $border-radius-small: ".2em";
 
-$asset-font-family: 'Bangers', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$asset-font-size: '16px' !default;
+// $asset-font-family: 'Bangers', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+// $asset-font-size: 16px !default;
 
 
 .TributeAssetTitle {
-  background-color: $asset-color-bg;
-  border-radius: $border-radius-small;
+  background-color: #ccc;
+  // background-color: $asset-color-bg;
+  border-radius: ".2em";
+  // border-radius: $border-radius-small;
   box-sizing: content-box;
-  color: $asset-color-text;
+  color: #333;
+  // color: $asset-color-text;
   display: block;
-  font-family: $asset-font-family;
-  font-size: $asset-font-size;
+  font-family: 'Bangers', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  // font-family: $asset-font-family;
+  font-size: 16px;
+  // font-size: $asset-font-size;
   font-weight: 400;
   padding: 1em;
   position: absolute;

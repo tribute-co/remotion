@@ -1,7 +1,8 @@
 import {useCurrentFrame, interpolate, Img, Video} from 'remotion';
 import { crossZoom, fadeIn } from './tributeTransitions';
 
-import '../styles/main.scss';
+import '../styles/main.css';
+// import '../styles/main.scss';
 
 export const TributeAssetTitle: React.FC<{data: any; background: string; transition: string; rotation:number}> = ({data, background, transition, rotation}) => {
 

@@ -13,7 +13,7 @@ Config.Bundling.overrideWebpackConfig((currentConfiguration) => {
           ? currentConfiguration.module.rules
           : []),
         {
-          test: /\.s?css$/i,
+          test: /\.s(a|c)ss$/,
           use: [
             // Creates `style` nodes from JS strings
             "style-loader",
@@ -22,7 +22,7 @@ Config.Bundling.overrideWebpackConfig((currentConfiguration) => {
             // Compiles Sass to CSS
             "sass-loader",
           ],
-        },
+        }
       ],
     },
   };

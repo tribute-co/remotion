@@ -244,8 +244,8 @@ export const preprocess = (
         mediaAssets.push(
           <Sequence
             name={`Seq elem #${idx} - Title`}
-            from={currentFrame}
             key={`seq#${idx}`}
+            from={currentFrame}
             durationInFrames={elemDurationInFrames}
           >
             {currentElem.textFields.map((data:any, idx:number) => (

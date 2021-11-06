@@ -1,18 +1,20 @@
 import {Composition, useVideoConfig} from 'remotion';
 import {HelloWorld} from './HelloWorld';
 import {TributeVideo} from './TributeVideo';
-// import { TributePlayer } from './TributeVideoPlayer';
+import { TributePlayer } from './TributeVideoPlayer';
 
 import { preprocess } from './tools/preprocess';
 
-// import tributeData from './long_tribute.json';
-import tributeData from './tribute.json';
+import tributeData from './long_tribute.json';
+// import tributeData from './tribute.json';
 
 
 export const RemotionVideo: React.FC = () => {
 
 	const {
 		mediaAssets,
+		height,
+		width,
 		totalFrames,
 	} = preprocess(tributeData);
 	// console.log(totalFrames);
@@ -24,8 +26,10 @@ export const RemotionVideo: React.FC = () => {
 				component={TributeVideo}
 				durationInFrames={totalFrames}
 				fps={30}
-				width={1920}
-				height={1080}
+				width={320}
+				// width={1920}
+				height={240}
+				// height={1080}
 				defaultProps={{
 					titleText: "Tribute video",
 					titleColor: 'black',

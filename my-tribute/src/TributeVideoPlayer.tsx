@@ -4,8 +4,8 @@ import { TributeVideo, totalFrames } from './TributeVideo';
 
 import { preprocess } from './tools/preprocess';
 
-import tributeData from './tribute.json';
-// import tributeData from './long_tribute.json';
+// import tributeData from './tribute.json';
+import tributeData from './long_tribute.json';
 
 
 export const TributePlayer: React.FC = () => {
@@ -32,8 +32,8 @@ export const TributePlayer: React.FC = () => {
       allowFullScreen={true}
       doubleClickToFullscreen={true}
       showVolumeControls={true}
-      compositionHeight={600}
-      compositionWidth={800}
+      compositionHeight={320}
+      compositionWidth={240}
       durationInFrames={totalFrames}
       inputProps={{mediaAssets: mediaAssets}}
       // other props

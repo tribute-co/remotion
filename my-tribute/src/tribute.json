@@ -1,0 +1,100 @@
+{
+  "id": "65f912f7710a4a89be0c6d508ba8d4e8",
+  "media": {
+      "83c1add07814457090782bd472335f99": {
+          "trim": [
+              0,
+              8
+          ],
+          "type": "title",
+          "filter": "FILTER_NONE",
+          "volume": 0.8,
+          "duration": 8,
+          "uploader": "",
+          "background": "#ffac38",
+          "textFields": [
+              {
+                  "x": 0.28,
+                  "y": 0.425,
+                  "text": "Hola al que esté leyendo!",
+                  "width": 0.46313189338235294,
+                  "height": 0.16384999999999997,
+                  "fontSize": 30,
+                  "fontColor": "#000000",
+                  "fontFamily": "arial",
+                  "fontWeight": 400
+              }
+          ],
+          "transition": "CROSS_ZOOM",
+          "rotationIndex": 10,
+          "muteBackgroundMusic": false
+      },
+      "c0998749651cfcd3d071308846381a79": {
+          "trim": [
+              0,
+              6.2
+          ],
+          "type": "video",
+          "video": "https://embed-cdn.ziggeo.com/v1/applications/5ce204d499248140ca42682f1700e1b8/videos/c0998749651cfcd3d071308846381a79/streams/0e4a94c35005275a134f724aa9224213/video.mp4",
+          "filter": "FILTER_NONE",
+          "volume": 1,
+          "duration": 6.2,
+          "uploader": "Admin",
+          "video_hq": "https://embed-cdn.ziggeo.com/v1/applications/5ce204d499248140ca42682f1700e1b8/videos/c0998749651cfcd3d071308846381a79/streams/4c31cebd3d8390b2ad0976415197263c/video.mp4",
+          "textFields": [],
+          "transition": "RANDOM_SQUARES",
+          "rotationIndex": 0,
+          "muteBackgroundMusic": false
+      },
+      "c9246c6bcf6d4f69b328829684f8fad1": {
+          "img": "https://ucarecdn.com/628b0927-2610-4a81-b25c-375384999236~1/nth/0/",
+          "trim": [
+              0,
+              4
+          ],
+          "type": "img",
+          "filter": "FILTER_NONE",
+          "volume": 1,
+          "duration": 4,
+          "uploader": "",
+          "textFields": [],
+          "transition": "RANDOM_SQUARES",
+          "rotationIndex": 0,
+          "muteBackgroundMusic": false
+      }
+  },
+  "config": {
+      "applyKenburns": false,
+      "pauseMusicOnVideo": false,
+      "viginetteByDefault": false,
+      "backgroundMusicVolume": 0.03,
+      "staticBackgroundMusicVolume": 0.75
+  },
+  "tracks": [
+    {
+        "id": "7ba801ba-5d74-4ee7-8bd2-c59a0a16b99a",
+        "end": 0,
+        "src": "https://storage.googleapis.com/tribute-music-prod/212_full_hello-sunshine_0191.mp3",
+        "blob": "blob:https://www.tribute.co/f1dc316b-fee8-4afc-bbc2-596d6cc64a15",
+        "start": 0,
+        "title": "Hello Sunshine",
+        "volume": 1,
+        "trackId": null,
+        "audioTag": null,
+        "duration": 190.119184,
+        "progress": 0,
+        "widthUnits": [],
+        "startOffset": 0,
+        "waveformUrl": null,
+        "originalDuration": 190.119184
+      }
+  ],
+  "pending": [],
+  "restore": [],
+  "version": 7,
+  "playlist": [
+      "c0998749651cfcd3d071308846381a79",
+      "83c1add07814457090782bd472335f99",
+      "c9246c6bcf6d4f69b328829684f8fad1"
+  ]
+}
